@@ -1,0 +1,42 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function ownerEmail() {
+      return 'ronnywoods77@gmail.com';
+    }
+
+    function isOwner() {
+      return signedIn() && request.auth.token.email == ownerEmail();
+    }
+
+    match /serviceRequests/{requestId} {
+      allow create: if true;
+      allow read, update, delete: if isOwner();
+    }
+
+    match /cleaners/{cleanerId} {
+      allow create: if signedIn() && request.auth.uid == cleanerId;
+      allow read: if isOwner() || (signedIn() && request.auth.uid == cleanerId);
+      allow update: if isOwner() || (signedIn() && request.auth.uid == cleanerId);
+      allow delete: if isOwner();
+    }
+
+    match /jobs/{jobId} {
+      allow read: if signedIn();
+      allow create, delete: if isOwner();
+      allow update: if isOwner()
+        || (
+          signedIn()
+          && (
+            resource.data.acceptedBy == null
+            || resource.data.acceptedBy == request.auth.uid
+          )
+        );
+    }
+  }
+}
