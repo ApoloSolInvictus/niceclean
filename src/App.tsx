@@ -631,36 +631,40 @@ function Header({
         <button
           className={view === "home" ? "nav-button active" : "nav-button"}
           onClick={() => setView("home")}
+          title="Inicio"
         >
           <House size={17} />
-          Inicio
+          <span className="nav-label">Inicio</span>
         </button>
         <button
           className={view === "owner" ? "nav-button active" : "nav-button"}
           onClick={() => setView("owner")}
+          title="Rocio"
         >
           <LayoutDashboard size={17} />
-          Rocio
+          <span className="nav-label">Rocio</span>
         </button>
         <button
           className={view === "cleaner" ? "nav-button active" : "nav-button"}
           onClick={() => setView("cleaner")}
+          title="Limpieza"
         >
           <Users size={17} />
-          Limpieza
+          <span className="nav-label">Limpieza</span>
         </button>
         {activeUser ? (
-          <button className="nav-button" onClick={onLogout}>
+          <button className="nav-button" onClick={onLogout} title="Salir">
             <LogOut size={17} />
-            Salir
+            <span className="nav-label">Salir</span>
           </button>
         ) : (
           <button
             className={view === "auth" ? "nav-button active" : "nav-button"}
             onClick={() => setView("auth")}
+            title="Login"
           >
             <LogIn size={17} />
-            Login
+            <span className="nav-label">Login</span>
           </button>
         )}
       </nav>

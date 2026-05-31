@@ -59,10 +59,10 @@ img {
   top: 0;
   z-index: 20;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 18px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
   align-items: center;
-  padding: 14px clamp(16px, 4vw, 48px);
+  padding: 10px clamp(16px, 4vw, 42px);
   border-bottom: 1px solid rgba(219, 232, 242, 0.9);
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(18px);
@@ -76,15 +76,23 @@ img {
 }
 
 .brand-button img {
-  width: clamp(130px, 15vw, 190px);
+  width: clamp(96px, 10vw, 154px);
   height: auto;
 }
 
 .nav-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: 8px;
+  gap: 7px;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 2px;
+  scrollbar-width: none;
+}
+
+.nav-actions::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-button,
@@ -109,9 +117,14 @@ img {
 }
 
 .nav-button {
-  padding: 9px 13px;
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 8px 11px;
   color: var(--navy);
   background: #ffffff;
+  font-size: 14px;
+  font-weight: 750;
+  white-space: nowrap;
 }
 
 .nav-button.active,
@@ -121,11 +134,15 @@ img {
 }
 
 .user-pill {
-  padding: 9px 12px;
+  min-width: 0;
+  max-width: 260px;
+  overflow: hidden;
+  padding: 8px 11px;
   border-radius: 8px;
   background: var(--navy);
   color: #ffffff;
-  font-size: 13px;
+  font-size: 12px;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -740,12 +757,7 @@ code {
 
 @media (max-width: 1080px) {
   .site-header {
-    grid-template-columns: 1fr;
-  }
-
-  .brand-button,
-  .user-pill {
-    justify-self: center;
+    grid-template-columns: auto minmax(0, 1fr);
   }
 
   .hero-section,
@@ -772,21 +784,56 @@ code {
   .owner-summary {
     width: 100%;
   }
+
+  .user-pill {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    max-width: none;
+    text-align: center;
+  }
 }
 
 @media (max-width: 720px) {
   .site-header {
-    padding: 12px;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .brand-button img {
+    width: 58px;
   }
 
   .nav-actions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
   }
 
   .nav-button {
-    width: 100%;
+    width: 36px;
+    min-height: 34px;
+    padding: 0;
+    gap: 0;
+    font-size: 12px;
+  }
+
+  .nav-button svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .nav-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .user-pill {
+    min-height: 30px;
+    padding: 7px 10px;
+    font-size: 11px;
   }
 
   .hero-copy h1,

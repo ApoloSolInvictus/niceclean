@@ -2,6 +2,28 @@
 
 Web app para Nice Clean Servicios de Limpieza en Rohrmoser, Pavas y San Jose.
 
+## Deploy en Vercel
+
+Si, esta app puede publicarse en Vercel como proyecto Vite.
+
+1. Importa el repositorio `ApoloSolInvictus/niceclean` en Vercel.
+2. Usa `npm install` como Install Command.
+3. Usa `npm run build` como Build Command.
+4. Usa `dist` como Output Directory.
+5. Agrega estas variables en Project Settings > Environment Variables:
+
+```bash
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+VITE_OWNER_EMAIL=ronnywoods77@gmail.com
+```
+
+Despues del primer deploy, agrega el dominio de Vercel en Firebase Authentication > Settings > Authorized domains. Ejemplos: `niceclean.vercel.app` y cualquier dominio propio que conectes.
+
 ## Configuracion Firebase
 
 1. Crea un proyecto gratis en Firebase.
@@ -16,7 +38,7 @@ npm install
 npm run dev
 ```
 
-El correo dueño por defecto es `ronnywoods77@gmail.com`. Puedes cambiarlo con `VITE_OWNER_EMAIL`.
+El correo dueno por defecto es `ronnywoods77@gmail.com`. Puedes cambiarlo con `VITE_OWNER_EMAIL`.
 
 ## Colecciones
 
